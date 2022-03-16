@@ -31,7 +31,7 @@ def predict():
             pygraph = plt.plot(x, y)
         else:
             pygraph = plt.scatter(x, y)
-        plt.savefig('/new_plot.png')
+        plt.savefig('./static/images/new_plot.png')
         data = pd.DataFrame({"x":x, "y":y })
         print("Data: \n", data)
 
