@@ -31,7 +31,7 @@ def predict():
             pygraph = plt.plot(x, y)
         else:
             pygraph = plt.scatter(x, y)
-        plt.savefig('./static/images/new_plot.png')
+        plt.savefig('/static/images/new_plot.png')
         data = pd.DataFrame({"x":x, "y":y })
         print("Data: \n", data)
 
@@ -51,7 +51,7 @@ def predict():
             list1[i] = float(list1[i])
         test = list1
         print("Answer: ", model.predict([test]))
-        return render_template('stats.html', data_table=data, corr=data.corr(), graph='/static/images/new_plot.png', answer=model.predict([test]))
+        return render_template('stats.html', data_table=data, corr=data.corr(), answer=model.predict([test]))
 
 if __name__ == '__main__':
     app.run(debug=True)
