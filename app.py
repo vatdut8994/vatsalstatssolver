@@ -1,4 +1,4 @@
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from matplotlib import pyplot as plt
 from flask import Flask, render_template, request, send_file
@@ -22,6 +22,7 @@ def start():
 def predict():
     if request.method == 'POST':
         global pyplot
+        plt.grid()
         y = str(request.form['traindata'])
         list1 = y.split(',')
         for i in range(len(list1)):
@@ -33,6 +34,8 @@ def predict():
             list1[i] = float(list1[i])
         x = list1
         graphing = int(request.form['graphing'])
+        l1=(x[0], y[0])
+        l2 = (x[-1], y[-1])
         try:
             centraltendency = str(request.form['card'])
             list1 = centraltendency.split(',')
@@ -65,7 +68,7 @@ def predict():
 
         xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.2)
 
-        model = LinearRegression()
+        model = RandomForestRegressor(max_depth=5)
         model.fit(xtrain, ytrain)
 
         test = str(request.form['answer'])
@@ -79,7 +82,10 @@ def predict():
         img.seek(0)
         plot_url = base64.b64encode(img.getvalue()).decode('utf8')
         plt.close()
-        return render_template('stats.html', data_table=data, corr=data.corr(), graph='/static/images/new_plot.png', answer=model.predict([test]), plot_url=plot_url, bestfit=line_table, centraltendencies=statans)
+        m = float((l2[1] - l1[1])) / float(l2[0] - l1[0])
+        c = (l2[1] - (m * l2[0]))
+        eqbestfit = f'y={m}x+{c}'
+        return render_template('stats.html', data_table=data, corr=data.corr(), graph='/static/images/new_plot.png', answer=model.predict([test]), plot_url=plot_url, bestfit=line_table, centraltendencies=statans, bestfiteq=eqbestfit)
 
 if __name__ == '__main__':
     app.run(debug=True)
