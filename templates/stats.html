@@ -8,23 +8,23 @@
 </head>
 <body>
     <form action="/answers" method="POST">
-        <label for="traindata">Enter Data for training: </label>
+        <label for="traindata">Enter y values: </label>
         <input type="search" name="traindata" id="traindata"><br><br>
-        <label for="testdata">Enter Data for testing: </label>
+        <label for="testdata">Enter Data for prediction(x): </label>
         <input type="search" name="testdata" id="testdata"><br><br>
-        <pre>Data: <br>{{data_table}}</pre>
-        <pre>Correlation: <br>{{corr}}</pre>
-        <label for="graphing">Scatter Plot[0] or Graph[1]: </label>
+        <pre>Data Preview: <br>{{data_table}}</pre>
+        <pre>Correlation values: <br>{{corr}}</pre>
+        <label for="graphing">Choose graph type- Scatter Plot[0] or Graph[1]: </label>
         <input type="search" name="graphing" id="graphing"><br><br>
-        <img src="data:image/png;base64, {{ plot_url }}"><br><br>
-        <label for="answer">Enter test value: </label>
+        <label for="answer">Enter values for prediction: </label>
         <input type="search" name="answer" id="answer"><br><br>
         <label for="card">Enter Data for the measures of central tendency: </label>
         <input type="search" name="card" id="card"><br><br>
-        <pre>Central tendencies: <br>{{centraltendencies}}</pre>
         <input type="submit" value="Submit">
+        <pre>Central tendencies: <br>{{centraltendencies}}</pre>
         <p>Answer: <br>{{answer}}</p><br><br>
-        <pre>Line of best fit: <br><br>{{bestfit}}</pre>
+        <img src="data:image/png;base64, {{ plot_url }}"><br><br>
+        <pre>Line of best fit coordinates: <br><br>{{bestfit}}</pre>
         <pre>Line of best fit Equation: {{bestfiteq}}</pre>
     </form>
 </body>
