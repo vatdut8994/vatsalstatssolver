@@ -40,6 +40,8 @@ def predict():
             for i in range(len(list1)):
                 list1[i] = float(list1[i])
             test = list1
+            l1=(x[0], y[0])
+            l2 = (x[-1], y[-1])
         except:
             x = [1,2,3,4,5]
             y = [1,2,3,4,5]
